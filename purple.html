@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>CAM 04 — UNAUTHORIZED FOOTAGE</title>
+
+    <link rel="stylesheet" href="css/purple.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         OH
+    ========================== -->
+
+    <main class="discovery">
+
+        <div class="scanlines"></div>
+        <div class="noise"></div>
+
+        <div class="camera-status">
+            <span class="camera-name">CAM 04</span>
+            <span class="recording-dot"></span>
+            <span class="recording-text">REC</span>
+        </div>
+
+        <div class="timestamp">
+            1998-██-██ 03:17:██
+        </div>
+
+        <div class="discovery-content">
+
+            <div class="error-code">
+                404?
+            </div>
+
+            <div class="dots">
+                ...
+            </div>
+
+            <div class="wait">
+                WAIT.
+            </div>
+
+            <div class="warning">
+                UNAUTHORIZED FOOTAGE DETECTED.
+            </div>
+
+            <p>
+                THIS RECORDING WAS NOT<br>
+                SUPPOSED TO BE FOUND.
+            </p>
+
+            <div class="initializing">
+                INITIALIZING PLAYBACK
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+
+        </div>
+
+        <div class="camera-footer">
+            SIGNAL: <span>UNSTABLE</span>
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         EFEITO
+    ========================== -->
+
+    <main class="recording-page">
+
+        <!-- Vídeo usado como fundo -->
+        <div class="video-background">
+            <video
+    id="backgroundVideo"
+    muted
+    playsinline
+    preload="auto"
+    loop
+>
+    <source
+        src="assets/ourple-guy.mp4"
+        type="video/mp4"
+    >
+</video>
+        </div>
+
+        <!-- Escurece o fundo -->
+        <div class="background-overlay"></div>
+
+        <!-- Efeitos de câmera -->
+        <div class="recording-effects">
+            <div class="scanlines"></div>
+            <div class="noise"></div>
+            <div class="vignette"></div>
+        </div>
+
+        <!-- Interface da câmera -->
+        <div class="camera-interface">
+
+            <div class="camera-top">
+
+                <div class="camera-id">
+                    CAM 04
+                </div>
+
+                <div class="rec-indicator">
+                    <span></span>
+                    REC
+                </div>
+
+            </div>
+
+            <div class="camera-time">
+                1998-██-██ &nbsp; 03:17:██
+            </div>
+
+            <div class="camera-warning">
+                SIGNAL UNSTABLE
+            </div>
+
+        </div>
+
+
+        <!-- Vídeo principal -->
+        <div class="footage">
+<video
+                id="ourpleVideo"
+                playsinline
+                preload="metadata"
+                loop
+            >
+                <source
+                    src="assets/ourple-guy.mp4"
+                    type="video/mp4"
+                >
+            </video>
+
+        </div>
+
+
+        <div class="footage-label">
+            <span>ARCHIVE</span>
+            <span>CAM_04</span>
+        </div>
+
+        <div class="end-message">
+
+    <p class="thank-you">
+        THANK YOU FOR YOUR SUPPORT.
+    </p>
+
+    <p class="thank-you-sub">
+        I really appreciate you being here.
+    </p>
+
+    <a href="index.html" class="return-button">
+        ← RETURN TO HOME
+    </a>
+
+</div>
+
+    </main>
+
+
+    <script src="js/purple.js"></script>
+
+</body>
+</html>

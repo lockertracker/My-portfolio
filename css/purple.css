@@ -1,0 +1,891 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background: #050308;
+    color: white;
+    font-family: "Courier New", monospace;
+}
+
+
+/* =========================================
+   DESCOBERTA
+========================================= */
+
+.discovery {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #151019 0%,
+            #08060b 55%,
+            #020204 100%
+        );
+
+    overflow: hidden;
+
+    transition:
+        opacity 0.5s ease,
+        visibility 0.5s ease;
+}
+
+
+/* Quando termina a introdução */
+
+.discovery.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   GLITCH DA CÂMERA
+========================================= */
+
+.discovery.interference {
+    animation:
+        securityGlitch 0.11s steps(2) infinite,
+        screenFlicker 0.08s steps(2) infinite;
+}
+
+
+/* Glitch horizontal */
+
+@keyframes securityGlitch {
+
+    0% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+
+    15% {
+        transform: translate(-5px, 1px);
+        filter:
+            contrast(1.5)
+            brightness(1.15);
+    }
+
+    30% {
+        transform: translate(4px, -2px);
+        filter:
+            contrast(1.8)
+            saturate(0.3);
+    }
+
+    45% {
+        transform: translate(-8px, 0);
+        filter:
+            brightness(0.75);
+    }
+
+    60% {
+        transform: translate(6px, 2px);
+        filter:
+            contrast(1.7);
+    }
+
+    75% {
+        transform: translate(-3px, -1px);
+        filter:
+            brightness(1.3)
+            saturate(0.5);
+    }
+
+    90% {
+        transform: translate(3px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+        filter: none;
+    }
+}
+
+
+/* Pisca a imagem */
+
+@keyframes screenFlicker {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.72;
+    }
+}
+
+
+/* =========================================
+   LINHAS CRT
+========================================= */
+
+.scanlines {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.035) 0px,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    z-index: 20;
+    opacity: 0.45;
+}
+
+
+/* =========================================
+   NOISE
+========================================= */
+
+.noise {
+    position: absolute;
+    inset: -50%;
+
+    pointer-events: none;
+
+    z-index: 21;
+
+    opacity: 0.035;
+
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+
+    animation: noiseMove 0.15s steps(2) infinite;
+}
+
+@keyframes noiseMove {
+
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(4%, -3%);
+    }
+
+    50% {
+        transform: translate(-3%, 4%);
+    }
+
+    75% {
+        transform: translate(3%, 2%);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+
+/* =========================================
+   CÂMERA STATUS
+========================================= */
+
+.camera-status {
+    position: absolute;
+
+    top: 30px;
+    left: 35px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    letter-spacing: 2px;
+
+    z-index: 30;
+}
+
+.camera-name {
+    font-weight: bold;
+}
+
+.recording-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #ff3030;
+
+    box-shadow:
+        0 0 8px rgba(255, 50, 50, 0.8);
+
+    animation: recBlink 1s infinite;
+}
+
+@keyframes recBlink {
+
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0.25;
+    }
+}
+
+.recording-text {
+    color: #ff5050;
+}
+
+
+/* =========================================
+   TIMESTAMP
+========================================= */
+
+.timestamp {
+    position: absolute;
+
+    top: 60px;
+    left: 35px;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    z-index: 30;
+}
+
+
+/* =========================================
+   CONTEÚDO CENTRAL
+========================================= */
+
+.discovery-content {
+    position: relative;
+
+    width: min(600px, 85vw);
+
+    text-align: center;
+
+    z-index: 25;
+}
+
+
+/* 404 */
+
+.error-code {
+    font-size: clamp(40px, 7vw, 75px);
+
+    font-weight: bold;
+
+    letter-spacing: 10px;
+
+    margin-bottom: 25px;
+
+    text-shadow:
+        0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+
+/* ... */
+
+.dots {
+    margin-bottom: 25px;
+
+    opacity: 0.5;
+
+    letter-spacing: 8px;
+}
+
+
+/* WAIT */
+
+.wait {
+    font-size: 18px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 35px;
+}
+
+
+/* Aviso */
+
+.warning {
+    font-size: 17px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 25px;
+
+    color: #c9aaff;
+
+    text-shadow:
+        0 0 12px rgba(160, 100, 255, 0.4);
+}
+
+.discovery-content p {
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.7);
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================================
+   PLAYBACK
+========================================= */
+
+.initializing {
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+
+    color: rgba(255, 255, 255, 0.55);
+}
+
+
+/* Barra */
+
+.progress-container {
+    width: 100%;
+    height: 3px;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    overflow: hidden;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+
+    background: #a66cff;
+
+    box-shadow:
+        0 0 10px rgba(166, 108, 255, 0.7);
+
+    animation: loading 5.2s linear forwards;
+}
+
+@keyframes loading {
+
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+
+/* =========================================
+   FOOTER DA CÂMERA
+========================================= */
+
+.camera-footer {
+    position: absolute;
+
+    left: 35px;
+    bottom: 30px;
+
+    z-index: 30;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.camera-footer span {
+    color: #a66cff;
+}
+
+
+/* =========================================
+   PÁGINA DA GRAVAÇÃO
+========================================= */
+
+.recording-page {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transition: opacity 0.8s ease;
+}
+
+.recording-page.visible {
+    opacity: 1;
+}
+
+
+/* =========================================
+   VÍDEO DE FUNDO
+========================================= */
+
+.video-background {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.video-background video {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transform: scale(1.18);
+
+    filter:
+        blur(32px)
+        brightness(0.38)
+        saturate(1.5);
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.background-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0, 0, 0, 0.2) 45%,
+            rgba(0, 0, 0, 0.7) 100%
+        );
+}
+
+
+/* =========================================
+   EFEITOS DA GRAVAÇÃO
+========================================= */
+
+.recording-effects {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10;
+
+    pointer-events: none;
+}
+
+.vignette {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle,
+            transparent 45%,
+            rgba(0, 0, 0, 0.6) 100%
+        );
+}
+
+
+/* =========================================
+   INTERFACE DA CÂMERA
+========================================= */
+
+.camera-interface {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 30;
+
+    pointer-events: none;
+
+    padding: 30px 35px;
+}
+
+.camera-top {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.camera-id {
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.rec-indicator {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #ff5555;
+}
+
+.rec-indicator span {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #ff3333;
+
+    box-shadow:
+        0 0 10px rgba(255, 50, 50, 0.9);
+
+    animation: recBlink 1s infinite;
+}
+
+.camera-time {
+    margin-top: 10px;
+
+    font-size: 11px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    letter-spacing: 1px;
+}
+
+.camera-warning {
+    position: absolute;
+
+    right: 35px;
+    bottom: 30px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================
+   VÍDEO PRINCIPAL
+========================================= */
+
+.footage {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(1100px, 88vw);
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 0 50px rgba(0, 0, 0, 0.7),
+        0 0 100px rgba(120, 60, 255, 0.15);
+
+    background: #000;
+}
+
+.footage video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    filter:
+        contrast(1.05)
+        saturate(1.05);
+}
+
+
+/* =========================================
+   LABEL DO ARQUIVO
+========================================= */
+
+.footage-label {
+    position: fixed;
+
+    left: 35px;
+    bottom: 30px;
+
+    z-index: 35;
+
+    display: flex;
+
+    gap: 15px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    color: rgba(255, 255, 255, 0.45);
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 700px) {
+
+    .camera-status,
+    .timestamp,
+    .camera-interface {
+        padding-left: 20px;
+        left: 20px;
+    }
+
+    .camera-footer,
+    .footage-label {
+        left: 20px;
+    }
+
+    .camera-status {
+        top: 20px;
+    }
+
+    .timestamp {
+        top: 48px;
+    }
+
+    .camera-footer {
+        bottom: 20px;
+    }
+
+    .footage {
+        width: 94vw;
+    }
+
+    .warning {
+        font-size: 13px;
+    }
+
+    .discovery-content p {
+        font-size: 11px;
+    }
+}
+
+/* =========================================
+   MENSAGEM FINAL
+========================================= */
+
+.end-message {
+    position: fixed !important;
+
+    left: 50% !important;
+    bottom: 50px !important;
+
+    transform: translateX(-50%) !important;
+
+    width: auto !important;
+    max-width: 90vw;
+
+    text-align: center;
+
+    z-index: 99999 !important;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+}
+
+
+.end-message.visible {
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    pointer-events: auto;
+}
+
+
+.thank-you {
+    margin: 0;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 3px;
+
+    color: white;
+
+    text-shadow:
+        0 0 8px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(139, 92, 246, 0.7);
+}
+
+
+.thank-you-sub {
+    margin: 8px 0 20px;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+.return-button {
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    border: 1px solid rgba(255, 255, 255, 0.3);
+
+    border-radius: 4px;
+
+    color: rgba(255, 255, 255, 0.85);
+
+    background: rgba(0, 0, 0, 0.7);
+
+    text-decoration: none;
+
+    font-family: "Courier New", monospace;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    transition: 0.3s ease;
+}
+
+
+.return-button:hover {
+
+    color: white;
+
+    border-color: #a66cff;
+
+    background: rgba(90, 40, 150, 0.3);
+
+    box-shadow:
+        0 0 15px rgba(139, 92, 246, 0.5);
+}
+
+
+@media (max-width: 700px) {
+
+    .end-message {
+        bottom: 30px !important;
+        width: 90vw !important;
+    }
+
+    .thank-you {
+        font-size: 14px;
+        letter-spacing: 2px;
+    }
+
+    .thank-you-sub {
+        font-size: 11px;
+    }
+
+    .return-button {
+        font-size: 10px;
+        padding: 9px 16px;
+    }
+
+}
+
+/* =========================
+   VÍDEO PRINCIPAL
+========================= */
+
+.footage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footage video {
+    display: block;
+
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
